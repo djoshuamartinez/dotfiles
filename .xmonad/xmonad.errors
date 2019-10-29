@@ -1,0 +1,24 @@
+
+xmonad.hs:12:20: warning: [-Wdeprecations]
+    In the use of ‘defaultConfig’
+    (imported from XMonad, but defined in XMonad.Config):
+    Deprecated: "Use def (from Data.Default, and re-exported by XMonad and XMonad.Config) instead."
+   |
+12 |     xmonad $ docks defaultConfig {
+   |                    ^^^^^^^^^^^^^
+
+xmonad.hs:13:84: warning: [-Wdeprecations]
+    In the use of ‘defaultConfig’
+    (imported from XMonad, but defined in XMonad.Config):
+    Deprecated: "Use def (from Data.Default, and re-exported by XMonad and XMonad.Config) instead."
+   |
+13 |         manageHook = manageDocks <+> (isFullscreen --> doFullFloat) <+> manageHook defaultConfig,
+   |                                                                                    ^^^^^^^^^^^^^
+
+xmonad.hs:14:114: warning: [-Wdeprecations]
+    In the use of ‘defaultConfig’
+    (imported from XMonad, but defined in XMonad.Config):
+    Deprecated: "Use def (from Data.Default, and re-exported by XMonad and XMonad.Config) instead."
+   |
+14 |         layoutHook = spacingRaw False (Border 20 20 20 20) True (Border 7 7 7 7) True $ avoidStruts $ layoutHook defaultConfig,
+   |                                                                                                                  ^^^^^^^^^^^^^

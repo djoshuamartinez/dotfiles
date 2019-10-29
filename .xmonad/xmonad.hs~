@@ -1,0 +1,24 @@
+import XMonad
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks (ToggleStruts(..), avoidStruts, docks, manageDocks)
+import XMonad.Hooks.ManageHelpers
+import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Layout.Spacing
+import System.IO
+
+main = do
+    xmproc <- spawnPipe "xmobar" --"/usr/bin/xmobar ~/.xmobarrc"
+    xmonad $ docks defaultConfig {
+        manageHook = manageDocks <+> (isFullscreen --> doFullFloat) <+> manageHook defaultConfig,
+        layoutHook = spacingRaw False (Border 20 20 20 20) True (Border 7 7 7 7) True $ avoidStruts $ layoutHook defaultConfig,
+        terminal = "urxvt",
+        modMask = mod4Mask,
+        logHook = dynamicLogWithPP xmobarPP
+            { ppOutput = hPutStrLn xmproc,
+              ppTitle = xmobarColor "white" "" . shorten 100,
+              ppLayout = \l->"",
+              ppCurrent = xmobarColor "#848484" "" . wrap "->" ""
+            },
+        borderWidth = 0
+        }
