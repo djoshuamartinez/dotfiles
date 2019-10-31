@@ -50,12 +50,10 @@
 ;(set-frame-parameter (selected-frame) 'alpha '(65 50))
 ;(add-to-list 'default-frame-alist '(alpha 65 50))
 
-;(load-theme 'misterioso)
+(load-theme 'dracula)
+(toggle-scroll-bar -1)
 ;(setq inhibit-startup-screen t)
 
-;(use-package flycheck
-;  :ensure t
-;  :init (global-flycheck-mode))
 
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
@@ -73,10 +71,25 @@
 (flycheck-add-mode 'javascript-eslint 'rjsx-mode)
 
 ; Use eslint from node_modules
-(add-hook 'flycheck-mode-hook 'add-node-modules-path)
+;(add-hook 'flycheck-mode-hook 'add-node-modules-path)
 
 ; Enable flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
+
+
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(defvar toggle-menu-state)
+(setq toggle-menu-state 1)
+(defun toggle-menus ()
+    "Toggle header menus."
+    (interactive)
+    (tool-bar-mode toggle-menu-state)
+    (menu-bar-mode toggle-menu-state)
+    (setq toggle-menu-state (* -1 toggle-menu-state))
+)
+(global-set-key (kbd "C-w m") 'toggle-menus)
+
 
 ;(add-hook 'web-mode-hook
           ;(lambda ()
@@ -136,6 +149,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("b46ee2c193e350d07529fcd50948ca54ad3b38446dcbd9b28d0378792db5c088" default)))
  '(package-selected-packages
    (quote
     (add-node-modules-path company-php helm-projectile helm windata web-mode use-package typescript-mode tree-mode rjsx-mode prosjekt projectile php-mode org-re-reveal neotree magit haskell-mode flycheck-package evil-visual-mark-mode evil-org erlang elm-mode dracula-theme company 2048-game))))
